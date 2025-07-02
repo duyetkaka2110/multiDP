@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>player</title>
+    
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="vi">
+    <!-- <meta name="google" content="notranslate">
+    <meta name="author" content="Player">
+    <meta name="title" content="Player Live">
+    <meta name="description" content="Player Live">
+    <meta name="keywords" content="Player Live">
+    <link rel="”icon”" type="”image/x-icon”" href="”/favicon.ico”">
+    <link rel="”apple-touch-icon”" type="”image/x-icon”" href="”/favicon.ico”">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="fullscreen=*"> -->
+    <!-- <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" /> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <style>
+        .mg-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mg-button button {
+            width: 7em;
+            display: inline-block;
+            border: none;
+            font-weight: bold;
+            margin: 3px;
+        }
+
+        .mg-button button.active {
+            background-color: aquamarine;
+        }
+    </style>
+    <div class="mg-button">
+        <button class="b0" data-id="hd">SERVER 1</button>
+        <!-- <button class="b1" data-id="sd">SERVER 2</button> -->
+        <button class="b3" data-id="ld">SERVER 2</button>
+        <button class="b2 active" data-id="ld">SERVER 3</button>
+
+    </div>
+    <link rel="stylesheet" href="index.min.css">
+    <script src="index.min.js"></script>
+    <div id="video" class="video"></div>
+    <div id="video2" class="video"></div>
+    <script>
+        const appId = "68686868";
+        const prefix = "https://";
+        const apt = "worker";
+        const queryString = window.location.search;
+        const md = "bpmedialive";
+        const urlParams = new URLSearchParams(queryString);
+        const streamKey = urlParams.get('streamKey');
+        code = urlParams.get('code');
+
+        const cam = urlParams.get('cam');
+
+        $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
+
+        code = urlParams.get('code');
+
+        if (!code) {
+            const api = prefix + "apigd.sdfhghiuuas." + apt + "s.dev";
+            $.get(api, function (r) {
+                code = r;
+                console.info(code)
+                // render(code);
+            }).fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+        } else {
+            // render(code);
+        }
+        function render(code, pref = "hd") {
+            saru_link = code + "/" + cam;
+            if (pref == "flv")
+                saru_link += "." + pref;
+            else
+                saru_link += "_" + pref + ".sdp";
+            var playerSdk = new SaruPlayer({
+                lang: 'en',
+                id: 'video',
+                url: saru_link,
+                isLive: true,
+                width: 700,
+                height: 380,
+                autoplay: true,
+                autoplayMuted: false,
+                vodLogOpts: {
+                    line_app_id: 562771,
+                    tag: 'normal'
+                }
+            });
+        }
+
+        $(document).on("click", ".mg-button button.b1", function () {
+            $(".video").empty();
+            id = $(this).attr("data-id");
+            // render(code, id);
+            $(".mg-button button").removeClass("active");
+            
+            $(this).addClass("active");
+             $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b0", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b2", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b3", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+    </script>
+    <script>
+    </script>
+</body>
+</html>
