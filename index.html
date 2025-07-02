@@ -44,10 +44,10 @@
         }
     </style>
     <div class="mg-button">
-        <button class="b0" data-id="hd">SERVER 1</button>
+        <button class="b0 active" data-id="hd">SERVER 1</button>
         <!-- <button class="b1" data-id="sd">SERVER 2</button> -->
         <button class="b3" data-id="ld">SERVER 2</button>
-        <button class="b2 active" data-id="ld">SERVER 3</button>
+        <button class="b2" data-id="ld">SERVER 3</button>
 
     </div>
     <link rel="stylesheet" href="index.min.css">
@@ -66,7 +66,7 @@
 
         const cam = urlParams.get('cam');
 
-        $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.cayphim.tv/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
 
         code = urlParams.get('code');
