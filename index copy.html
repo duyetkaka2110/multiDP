@@ -3,7 +3,7 @@
 
 <head>
     <title>player</title>
-
+    
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="content-language" content="vi">
@@ -20,70 +20,41 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" /> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
 </head>
 
 <body>
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
-
         .mg-button {
-            position: absolute;
-            top: 25px;
-            right: 0px;
-            display: none;
+            display: flex;
             justify-content: center;
             max-width: 700px;
-            z-index: 1000;
-        }
-
-        .btn-menu {
-            position: absolute;
-            top: 1px;
-            right: 2px;
-            padding: 3px 5px;
-            background: #ed1e1e;
-            color: #fff;
-            z-index: 1000;
         }
 
         .mg-button button {
             width: 7em;
-            display: block;
+            display: inline-block;
             border: none;
             font-weight: bold;
             margin: 3px;
-            padding: 10px 5px;
-            z-index: 1000;
         }
-        .video{
-            position: relative;
-            z-index: 1;
-        }
+
         .mg-button button.active {
             background-color: aquamarine;
         }
     </style>
-    <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
-    <div class="mg-button" id="myLinks">
-        <button class="b0 active" data-id="hd" onclick="myFunction()">SERVER 1</button>
+    <div class="mg-button">
+        <button class="b0 active" data-id="hd">SERVER 1</button>
         <!-- <button class="b1" data-id="sd">SERVER 2</button> -->
-        <button class="b3" data-id="ld" onclick="myFunction()">SERVER 2</button>
-        <button class="b2" data-id="ld" onclick="myFunction()">SERVER 3</button>
+        <button class="b3" data-id="ld">SERVER 2</button>
+        <button class="b2" data-id="ld">SERVER 3</button>
 
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
-    <div id="video" class="video "></div>
+    <div id="video" class="video"></div>
     <div id="video2" class="video"></div>
     <script>
-
         const appId = "68686868";
         const prefix = "https://";
         const apt = "worker";
@@ -95,7 +66,7 @@
 
         const cam = urlParams.get('cam');
 
-        $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="311" width="548" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="100%" width="100%" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
 
         code = urlParams.get('code');
@@ -124,8 +95,8 @@
                 id: 'video',
                 url: saru_link,
                 isLive: true,
-                width: 548,
-                height: 311,
+                width: 700,
+                height: 380,
                 autoplay: true,
                 autoplayMuted: false,
                 vodLogOpts: {
@@ -134,53 +105,36 @@
                 }
             });
         }
-        $(document).ready(function () {
-            // $(".btn-menu").click(function () {
-            //     $(".mg-button").show();
-            // })
-            $(".btn-button button").on("click", function () {
-                myFunction()
-            })
-        })
 
-        function myFunction() {
-            var x = document.getElementById("myLinks");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
         $(document).on("click", ".mg-button button.b1", function () {
             $(".video").empty();
             id = $(this).attr("data-id");
             // render(code, id);
             $(".mg-button button").removeClass("active");
-
+            
             $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="311" width="548" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
+             $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
         })
         $(document).on("click", ".mg-button button.b0", function () {
             $(".video").empty();
             $(".mg-button button").removeClass("active");
             $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="311" width="548" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         })
         $(document).on("click", ".mg-button button.b2", function () {
             $(".video").empty();
             $(".mg-button button").removeClass("active");
             $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="311" width="548" frameborder="0" src="https://player.bakent.live/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.bakent.live/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         })
         $(document).on("click", ".mg-button button.b3", function () {
             $(".video").empty();
             $(".mg-button button").removeClass("active");
             $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="311" width="548" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="380" width="700" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         })
     </script>
     <script>
     </script>
 </body>
-
 </html>
