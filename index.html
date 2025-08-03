@@ -109,6 +109,7 @@
             wif = $(window).width();
             if (wif < 700) wif = 388;
             hif = wif * 9 / 16;
+            if (wif < 700) hif -= 10;
             $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
             urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
         });
