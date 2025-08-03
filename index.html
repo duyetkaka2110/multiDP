@@ -67,8 +67,6 @@
         .video {
             position: relative;
             z-index: 1;
-            width: 100%;
-            height: 100%;
         }
 
         @media screen and (max-width: 500px) {
@@ -114,101 +112,101 @@
         const streamKey = urlParams.get('streamKey');
         code = urlParams.get('code');
         const cam = urlParams.get('cam');
-        setTimeout(function () {
+        // setTimeout(function () {
 
-            $(document).ready(function () {
-                wif = $(window).width();
-                hif = wif * 9 / 16;
-                if (wif < 700) {
-                    wif = wif+30;
-                    hif = hif = wif * 9 / 16+5;
-                }
-                // wif = hif = "100%";
-                $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-                urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
-            });
-            code = urlParams.get('code');
+        $(document).ready(function () {
+            wif = $(window).width();
+            hif = wif * 9 / 16;
+            if (wif < 700) {
+                wif = wif + 30;
+                hif = hif = wif * 9 / 16 + 5;
+            }
+            // wif = hif = "100%";
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
+        });
+        code = urlParams.get('code');
 
-            if (!code) {
-                const api = prefix + "apigd.sdfhghiuuas." + apt + "s.dev";
-                $.get(api, function (r) {
-                    code = r;
-                    console.info(code)
-                    // render(code);
-                }).fail(function (jqxhr, textStatus, error) {
-                    var err = textStatus + ", " + error;
-                    console.log("Request Failed: " + err);
-                });
-            } else {
+        if (!code) {
+            const api = prefix + "apigd.sdfhghiuuas." + apt + "s.dev";
+            $.get(api, function (r) {
+                code = r;
+                console.info(code)
                 // render(code);
-            }
-            function render(code, pref = "hd") {
-                saru_link = code + "/" + cam;
-                if (pref == "flv")
-                    saru_link += "." + pref;
-                else
-                    saru_link += "_" + pref + ".sdp";
-                var playerSdk = new SaruPlayer({
-                    lang: 'en',
-                    id: 'video',
-                    url: saru_link,
-                    isLive: true,
-                    width: '+wif+',
-                    height: '+hif+',
-                    autoplay: true,
-                    autoplayMuted: false,
-                    vodLogOpts: {
-                        line_app_id: 562771,
-                        tag: 'normal'
-                    }
-                });
-            }
-            $(document).ready(function () {
-                // $(".btn-menu").click(function () {
-                //     $(".mg-button").show();
-                // })
-                $(".btn-button button").on("click", function () {
-                    myFunction()
-                })
-
-            })
-
-            function myFunction() {
-                var x = document.getElementById("myLinks");
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                } else {
-                    x.style.display = "block";
+            }).fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+        } else {
+            // render(code);
+        }
+        function render(code, pref = "hd") {
+            saru_link = code + "/" + cam;
+            if (pref == "flv")
+                saru_link += "." + pref;
+            else
+                saru_link += "_" + pref + ".sdp";
+            var playerSdk = new SaruPlayer({
+                lang: 'en',
+                id: 'video',
+                url: saru_link,
+                isLive: true,
+                width: '+wif+',
+                height: '+hif+',
+                autoplay: true,
+                autoplayMuted: false,
+                vodLogOpts: {
+                    line_app_id: 562771,
+                    tag: 'normal'
                 }
-            }
-            $(document).on("click", ".mg-button button.b1", function () {
-                $(".video").empty();
-                id = $(this).attr("data-id");
-                // render(code, id);
-                $(".mg-button button").removeClass("active");
+            });
+        }
+        $(document).ready(function () {
+            // $(".btn-menu").click(function () {
+            //     $(".mg-button").show();
+            // })
+            $(".btn-button button").on("click", function () {
+                myFunction()
+            })
 
-                $(this).addClass("active");
-                $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
-            })
-            $(document).on("click", ".mg-button button.b0", function () {
-                $(".video").empty();
-                $(".mg-button button").removeClass("active");
-                $(this).addClass("active");
-                $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-            })
-            $(document).on("click", ".mg-button button.b2", function () {
-                $(".video").empty();
-                $(".mg-button button").removeClass("active");
-                $(this).addClass("active");
-                $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-            })
-            $(document).on("click", ".mg-button button.b3", function () {
-                $(".video").empty();
-                $(".mg-button button").removeClass("active");
-                $(this).addClass("active");
-                $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-            })
-        }, 100);
+        })
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        $(document).on("click", ".mg-button button.b1", function () {
+            $(".video").empty();
+            id = $(this).attr("data-id");
+            // render(code, id);
+            $(".mg-button button").removeClass("active");
+
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b0", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b2", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+        $(document).on("click", ".mg-button button.b3", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
+        // }, 100);
 
     </script>
     <script>
