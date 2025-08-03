@@ -106,7 +106,7 @@
     <div id="video" class="video "></div>
     <div id="video2" class="video"></div>
     <script>
-
+alert($(window).width())
         const appId = "68686868";
         const prefix = "https://";
         const apt = "worker";
@@ -210,7 +210,7 @@
                 $(this).addClass("active");
                 $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
             })
-        }, 5000);
+        }, 100);
 
     </script>
     <script>
