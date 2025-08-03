@@ -86,6 +86,8 @@
     <div id="video2" class="video"></div>
     <script>
 
+        wif = $(window).width();
+        hif = wif * 9 / 16;
         const appId = "68686868";
         const prefix = "https://";
         const apt = "worker";
@@ -95,8 +97,6 @@
         const streamKey = urlParams.get('streamKey');
         code = urlParams.get('code');
 
-        wif = $(window).width();
-        hif = wif * 9 / 16;
         const cam = urlParams.get('cam');
 
         $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
