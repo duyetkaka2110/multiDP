@@ -107,7 +107,7 @@
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
         <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
-        <button class="b3" data-id="1" onclick="myFunction()">SERVER 2</button>
+        <button class="b1" data-id="1" onclick="myFunction()">SERVER 2</button>
         <button class="b2" data-id="2" onclick="myFunction()">SERVER 3</button>
 
     </div>
@@ -120,12 +120,6 @@
         const cam = urlParams.get('cam');
 
         $(document).ready(function () {
-            wif = $(window).width();
-            hif = wif * 9 / 16;
-            if (wif < 500) {
-                wif = wif + 30;
-                hif = hif = wif * 9 / 16;
-            }
             setTimeout(function () {
             render(0);
             }, 100);
