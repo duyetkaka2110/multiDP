@@ -77,7 +77,7 @@
             }
 
             body {
-            background-color: rgb(255, 241, 49);
+                background-color: rgb(255, 241, 49);
             }
         }
 
@@ -93,6 +93,23 @@
             width: 1000px;
             height: auto !important;
         } */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            /* Ensures it doesn't exceed parent width */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
@@ -104,8 +121,13 @@
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
-    <div id="video" class="video "></div>
-    <div id="video2" class="video"></div>
+    <!-- <div id="video" class="video "></div>
+    <div id="video2" class="video"></div> -->
+    <div class="video-container">
+        <iframe src="https://player.bakent.live/play.html?index=0&live=dgdakpuercam1&hd=true&t=1754362643976" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
     <script>
         const appId = "68686868";
         const prefix = "https://";
@@ -123,7 +145,7 @@
             hif = wif * 9 / 16;
             if (wif < 500) {
                 wif = wif + 30;
-                hif = hif = wif * 9 / 16 ;
+                hif = hif = wif * 9 / 16;
             }
             // wif = hif = "100%";
             $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
