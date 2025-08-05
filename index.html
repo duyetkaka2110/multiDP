@@ -121,8 +121,6 @@
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
-    <!-- <div id="video" class="video "></div>
-    <div id="video2" class="video"></div> -->
     <div class="video video-container">
         <iframe src="https://player.bakent.live/play.html?index=0&live=dgdakpuercam1&hd=true&t=1754362643976"
             frameborder="0"
@@ -142,6 +140,7 @@
                 wif = wif + 30;
                 hif = hif = wif * 9 / 16;
             }
+            render(0);
             // $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         });
 
@@ -164,8 +163,11 @@
             $(".video").empty();
             $(".mg-button button").removeClass("active");
             $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=' + $(this).attr("data-id") + '&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            render($(this).attr("data-id"));
         })
+        function render(idfr) {
+            $(".video").html('<iframe frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=' + idfr + '&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        }
 
         // }, 100);
 
