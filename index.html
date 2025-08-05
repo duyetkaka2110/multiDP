@@ -114,31 +114,24 @@
     </style>
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
-        <button class="b0 active" data-id="hd" onclick="myFunction()">SERVER 1</button>
-        <!-- <button class="b1" data-id="sd">SERVER 2</button> -->
-        <button class="b3" data-id="ld" onclick="myFunction()">SERVER 2</button>
-        <button class="b2" data-id="ld" onclick="myFunction()">SERVER 3</button>
+        <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
+        <button class="b3" data-id="1" onclick="myFunction()">SERVER 2</button>
+        <button class="b2" data-id="2" onclick="myFunction()">SERVER 3</button>
 
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
     <!-- <div id="video" class="video "></div>
     <div id="video2" class="video"></div> -->
-    <div class="video-container">
+    <div class="video video-container">
         <iframe src="https://player.bakent.live/play.html?index=0&live=dgdakpuercam1&hd=true&t=1754362643976"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
     </div>
     <script>
-        const appId = "68686868";
-        const prefix = "https://";
-        const apt = "worker";
         const queryString = window.location.search;
-        const md = "bpmedialive";
         const urlParams = new URLSearchParams(queryString);
-        const streamKey = urlParams.get('streamKey');
-        code = urlParams.get('code');
         const cam = urlParams.get('cam');
         // setTimeout(function () {
 
@@ -149,50 +142,10 @@
                 wif = wif + 30;
                 hif = hif = wif * 9 / 16;
             }
-            // wif = hif = "100%";
             // $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-            urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
         });
-        code = urlParams.get('code');
 
-        if (!code) {
-            const api = prefix + "apigd.sdfhghiuuas." + apt + "s.dev";
-            $.get(api, function (r) {
-                code = r;
-                console.info(code)
-                // render(code);
-            }).fail(function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.log("Request Failed: " + err);
-            });
-        } else {
-            // render(code);
-        }
-        function render(code, pref = "hd") {
-            saru_link = code + "/" + cam;
-            if (pref == "flv")
-                saru_link += "." + pref;
-            else
-                saru_link += "_" + pref + ".sdp";
-            var playerSdk = new SaruPlayer({
-                lang: 'en',
-                id: 'video',
-                url: saru_link,
-                isLive: true,
-                width: '+wif+',
-                height: '+hif+',
-                autoplay: true,
-                autoplayMuted: false,
-                vodLogOpts: {
-                    line_app_id: 562771,
-                    tag: 'normal'
-                }
-            });
-        }
         $(document).ready(function () {
-            // $(".btn-menu").click(function () {
-            //     $(".mg-button").show();
-            // })
             $(".btn-button button").on("click", function () {
                 myFunction()
             })
@@ -207,33 +160,13 @@
                 x.style.display = "block";
             }
         }
-        $(document).on("click", ".mg-button button.b1", function () {
+        $(document).on("click", ".mg-button button", function () {
             $(".video").empty();
-            id = $(this).attr("data-id");
-            // render(code, id);
             $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=' + $(this).attr("data-id") + '&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        })
 
-            $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://flive480.pages.dev/?streamKey=' + cam + '"></iframe>');
-        })
-        $(document).on("click", ".mg-button button.b0", function () {
-            $(".video").empty();
-            $(".mg-button button").removeClass("active");
-            $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-        })
-        $(document).on("click", ".mg-button button.b2", function () {
-            $(".video").empty();
-            $(".mg-button button").removeClass("active");
-            $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=2&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-        })
-        $(document).on("click", ".mg-button button.b3", function () {
-            $(".video").empty();
-            $(".mg-button button").removeClass("active");
-            $(this).addClass("active");
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=1&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
-        })
         // }, 100);
 
     </script>
