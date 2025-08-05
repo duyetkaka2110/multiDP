@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>player</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="content-language" content="vi">
     <meta name="referrer" content="no-referrer">
-     <meta http-equiv="Permissions-Policy" content="fullscreen=*"> 
+    <meta http-equiv="Permissions-Policy" content="fullscreen=*">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
@@ -55,9 +56,7 @@
             z-index: 1;
         }
 
-        @media screen and (max-width: 500px) {
-
-        }
+        @media screen and (max-width: 500px) {}
 
         .mg-button button.active {
             background-color: aquamarine;
@@ -114,17 +113,11 @@
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
-    <div class="video video-container">
-        <iframe src="https://player.bakent.live/play.html?index=0&live=dgdakpuercam1&hd=true&t=1754362643976"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-    </div>
+    <div class="video video-container"></div>
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const cam = urlParams.get('cam');
-        // setTimeout(function () {
 
         $(document).ready(function () {
             wif = $(window).width();
@@ -133,8 +126,9 @@
                 wif = wif + 30;
                 hif = hif = wif * 9 / 16;
             }
+            setTimeout(function () {
             render(0);
-            // $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            }, 100);
         });
 
         $(document).ready(function () {
@@ -162,7 +156,6 @@
             $(".video").html('<iframe frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=' + idfr + '&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
         }
 
-        // }, 100);
 
     </script>
     <script>
