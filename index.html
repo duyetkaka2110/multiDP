@@ -77,7 +77,7 @@
             }
 
             body {
-                background-color: black;
+                background:none transparent;
             }
         }
 
@@ -123,10 +123,10 @@
             hif = wif * 9 / 16;
             if (wif < 700) {
                 wif = wif + 30;
-                hif = hif = wif * 9 / 16 - 5;
+                hif = hif = wif * 9 / 16 ;
             }
             // wif = hif = "100%";
-            $("#video2").html('<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+            $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
             urlapi = apt + "api2.sdfhghiuuas." + apt + ".dev/";
         });
         code = urlParams.get('code');
