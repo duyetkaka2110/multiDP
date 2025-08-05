@@ -107,22 +107,33 @@
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
         <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
-        <button class="b1" data-id="1" onclick="myFunction()">SERVER 2</button>
+        <button class="b3" data-id="1" onclick="myFunction()">SERVER 2</button>
         <button class="b2" data-id="2" onclick="myFunction()">SERVER 3</button>
 
     </div>
     <link rel="stylesheet" href="index.min.css">
     <script src="index.min.js"></script>
-    <div class="video video-container"></div>
+    <div class="video video-container">
+        <iframe src="https://player.bakent.live/play.html?index=0&live=dgdakpuercam1&hd=true&t=1754362643976"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const cam = urlParams.get('cam');
 
         $(document).ready(function () {
-            setTimeout(function () {
+            wif = $(window).width();
+            hif = wif * 9 / 16;
+            if (wif < 500) {
+                wif = wif + 30;
+                hif = hif = wif * 9 / 16;
+            }
+            // setTimeout(function () {
             render(0);
-            }, 100);
+            // }, 100);
         });
 
         $(document).ready(function () {
