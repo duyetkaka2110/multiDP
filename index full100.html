@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>player</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="vi">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="fullscreen=*">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .mg-button {
+            position: absolute;
+            top: 25px;
+            right: 0px;
+            display: none;
+            justify-content: center;
+            max-width: 700px;
+            z-index: 1000;
+        }
+
+        .btn-menu {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 3px 5px;
+            background: #ba12cd;
+            color: #fff;
+            z-index: 1000;
+        }
+
+        .mg-button button {
+            width: 7em;
+            display: block;
+            border: none;
+            font-weight: bold;
+            margin: 3px;
+            padding: 10px 5px;
+            z-index: 1000;
+        }
+
+        .video {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media screen and (max-width: 500px) {}
+
+        .mg-button button.active {
+            background-color: aquamarine;
+        }
+
+        .video-container {
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            /* Ensures it doesn't exceed parent width */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Custom scrollbar for WebKit browsers */
+        ::-webkit-scrollbar {
+            width: 1px;
+            /* Set the width of the vertical scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            /* Color of the scrollbar track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            /* Color of the scrollbar thumb */
+            border-radius: px;
+            /* Rounded corners for the thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            /* Color of the thumb on hover */
+        }
+    </style>
+    <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
+    <div class="mg-button" id="myLinks">
+        <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
+        <button class="b3" data-id="1" onclick="myFunction()">SERVER 2</button>
+        <button class="b2" data-id="2" onclick="myFunction()">SERVER 3</button>
+
+    </div>
+    <link rel="stylesheet" href="index.min.css">
+    <script src="index.min.js"></script>
+    <div class="video video-container">
+    </div>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const cam = urlParams.get('cam');
+
+        $(document).ready(function () {
+            wif = $(window).width();
+            hif = wif * 9 / 16;
+            if (wif < 500) {
+                wif = wif + 30;
+                hif = hif = wif * 9 / 16;
+            }
+            // setTimeout(function () {
+            render(0);
+            // }, 100);
+        });
+
+        $(document).ready(function () {
+            $(".btn-button button").on("click", function () {
+                myFunction()
+            })
+
+        })
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        $(document).on("click", ".mg-button button", function () {
+            $(".video").empty();
+            $(".mg-button button").removeClass("active");
+            $(this).addClass("active");
+            render($(this).attr("data-id"));
+        })
+        function render(idfr) {
+            $(".video").html('<iframe frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=' + idfr + '&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
+        }
+
+
+    </script>
+    <script>
+    </script>
+</body>
+
+</html>
