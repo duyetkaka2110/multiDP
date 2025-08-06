@@ -74,15 +74,41 @@
             .mg-button,
             .btn-menu {
                 right: -30px;
+                font-size: 11px;
             }
 
             body {
-            background-color: rgb(216, 204, 29);
+                background-color: rgb(216, 204, 29);
             }
+            
         }
 
         .mg-button button.active {
             background-color: aquamarine;
+        }
+
+        /* Custom scrollbar for WebKit browsers */
+        ::-webkit-scrollbar {
+            width: 1px;
+            height: 1px;
+            /* Set the width of the vertical scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            /* Color of the scrollbar track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            /* Color of the scrollbar thumb */
+            border-radius: 1px;
+            /* Rounded corners for the thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            /* Color of the thumb on hover */
         }
 
         /* iframe {
@@ -123,7 +149,7 @@
             hif = wif * 9 / 16;
             if (wif < 500) {
                 wif = wif + 30;
-                hif = hif = wif * 9 / 16 ;
+                hif = hif = wif * 9 / 16;
             }
             // wif = hif = "100%";
             $("#video2").html('<iframe allowtransparency="true" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" id="winId" height="' + hif + '" width="' + wif + '" frameborder="0" src="https://player.bakent.live/play.html?index=0&live=' + cam + '&hd=true&t=' + Date.now() + '"></iframe>');
