@@ -13,9 +13,11 @@
     <meta name="theme-color" content="#000000" />
     <meta http-equiv="Permissions-Policy" content="fullscreen=*">
     <script src="https://player.bakent.live/ovenplayer/ovenplayer.js"></script>
-    <link rel="stylesheet" href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.css">
+    <link rel="stylesheet"
+        href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.css">
 
-    <script src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.js"></script>
+    <script
+        src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="https://player.bakent.live/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://player.bakent.live/favicon-32x32.png">
@@ -119,7 +121,7 @@
     </style>
     <div id="veplayer"></div>
     <div id="ovenplayer-wrapper" style="display: none;">
-      <div id="ovenplayer"></div>
+        <div id="ovenplayer"></div>
     </div>
     <button id="unmute-btn" style="display: none;">Bấm để bật tiếng 🔊</button>
     <div id="loading-indicator" style="display: none;"></div>
@@ -134,9 +136,15 @@
     <script src="index.min.js"></script> -->
     <!-- <div class="video video-container"> -->
     <!-- </div> -->
-    
-  
-    <script type="module" src="https://player.bakent.live/js/app.js?v={time}"></script>
+
+
+    <!-- <script type="module" src="https://player.bakent.live/js/app.js?v=<?= Date.now() ?>"></script> -->
+    <script>
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = `https://player.bakent.live/js/app.js?t=${Date.now()}`;
+        document.head.appendChild(script);
+    </script>
     <script>
         // Đọc param hiện tại và set active theo index
         (function initButtons() {
