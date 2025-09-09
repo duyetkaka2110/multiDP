@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-    <title>player</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Player Live</title>
-    <meta name="theme-color" content="#000000" />
-    <meta http-equiv="Permissions-Policy" content="fullscreen=*">
-    <script src="https://player.bakent.live/ovenplayer/ovenplayer.js"></script>
-    <link rel="stylesheet"
-        href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Player Live</title>
+  <meta name="theme-color" content="#000000" />
+  <meta http-equiv="Permissions-Policy" content="fullscreen=*">
+  
+  <!-- 1. Tải các thư viện Player -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.js"></script>
+  <script src="https://cdn.bakent.live/js/hls/hls.js"></script>
+  <script src="https://cdn.bakent.live/js/bakmedia.js"></script>
+  <!-- THÊM MỚI: Thư viện cho ZLMediaKit WebRTC -->
 
-    <script
-        src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://player.bakent.live/css/app.css">
+  <!-- 2. Tải các file CSS -->
+  <link rel="stylesheet" href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.bakent.live/bakent/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.bakent.live/bakent/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.bakent.live/bakent/favicon-16x16.png">
+  <link rel="manifest" href="https://cdn.bakent.live/bakent/site.webmanifest">
+  <!-- Tải file CSS của bạn -->
+  <link rel="stylesheet" href="https://player.bakent.live/2.0/css/app.css?v=1.2">
 </head>
-
 <body>
 
     <style>
@@ -125,12 +125,27 @@
             /* Color of the thumb on hover */
         }
     </style>
-    <div id="veplayer"></div>
-    <div id="ovenplayer-wrapper" style="display: none;">
-        <div id="ovenplayer"></div>
-    </div>
-    <button id="unmute-btn" style="display: none;">Bấm để bật tiếng 🔊</button>
-    <div id="loading-indicator" style="display: none;"></div>
+    <div id="ve-player-wrapper" class="player-container">
+        <div id="veplayer"></div>
+      </div>
+    
+      <div id="hls-player-wrapper" class="player-container">
+        <video id="hls-player" autoplay muted controls playsinline></video>
+        <div class="player-overlay" id="hls-overlay">
+            <div class="loader"></div>
+            <p class="status-text"></p>
+            <button class="unmute-button">Bấm để bật tiếng 🔊</button>
+        </div>
+      </div>
+      
+      <div id="webrtc-player-wrapper" class="player-container">
+        <video id="webrtc-player" autoplay muted controls playsinline></video>
+        <div class="player-overlay" id="webrtc-overlay">
+            <div class="loader"></div>
+            <p class="status-text"></p>
+            <button class="unmute-button">Bấm để bật tiếng 🔊</button>
+        </div>
+      </div>
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
         <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
@@ -148,7 +163,7 @@
     <script>
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = `https://player.bakent.live/js/app.js?t=${Date.now()}`;
+        script.src = `https://player.bakent.live/2.0/js/app.bundle.js?t=${Date.now()}`;
         document.head.appendChild(script);
     </script>
     <script>
@@ -156,6 +171,9 @@
         (function initButtons() {
             const params = new URLSearchParams(window.location.search);
             const currentIndex = Number(params.get('index')) || 0;
+            if (currentIndex > 2) {
+                currentIndex = 0;
+            }
 
             // Set active cho nút tương ứng
             document.querySelectorAll('.mg-button button').forEach(btn => btn.classList.remove('active'));
@@ -179,8 +197,6 @@
             params.set('index', id);
             window.location.search = params.toString();
         });
-    </script>
-    <script>
     </script>
 </body>
 
