@@ -1,57 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Player Live</title>
-    <meta name="theme-color" content="#000000" />
-    <meta http-equiv="Permissions-Policy" content="fullscreen=*">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Player Live</title>
+  <meta name="theme-color" content="#000000" />
+  <meta http-equiv="Permissions-Policy" content="fullscreen=*">
+  
+  <!-- 1. Tải các thư viện Player -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.js"></script>
+  <script src="https://player.bakent.live/2.0/js/hls/hls.js"></script>
+  <script src="https://player.bakent.live/2.0/js/bakmedia.js"></script>
+  <!-- <script src="https://player.bakent.live/2.0/js/bak.sdk.js"></script> -->
+  <!-- THÊM MỚI: Thư viện cho ZLMediaKit WebRTC -->
 
-    <!-- 1. Tải các thư viện Player -->
-    <script src="_worker.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script
-        src="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.9.1/umd/veplayer.production.js"></script>
-    <script src="https://player.bakent.live/2.0/js/hls/hls.js"></script>
-    <script src="https://player.bakent.live/2.0/js/bakmedia.js"></script>
-    <!-- THÊM MỚI: Thư viện cho ZLMediaKit WebRTC -->
-
-    <!-- 2. Tải các file CSS -->
-    <link rel="stylesheet"
-        href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.9.1/umd/veplayer.production.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.bakent.live/bakent/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.bakent.live/bakent/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.bakent.live/bakent/favicon-16x16.png">
-    <link rel="manifest" href="https://cdn.bakent.live/bakent/site.webmanifest">
-    <!-- Tải file CSS của bạn -->
-    <link id="app-css" rel="stylesheet">
-    <script>
-        const css = document.getElementById("app-css");
-        css.href = "https://player.bakent.live/2.0/css/app.css?v=1.3&ts=" + new Date().getTime();
-    </script>
+  <!-- 2. Tải các file CSS -->
+  <link rel="stylesheet" href="https://sf-unpkg.bytepluscdn.com/obj/byteplusfe-sg/sdk/@byteplus/veplayer/2.7.1/umd/veplayer.production.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.bakent.live/bakent/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.bakent.live/bakent/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.bakent.live/bakent/favicon-16x16.png">
+  <link rel="manifest" href="https://player.bakent.live/site.webmanifest">
+  <!-- Tải file CSS của bạn -->
+  <link rel="stylesheet" href="https://player.bakent.live/2.0/css/app.css?v=1.3">
 </head>
-
 <body>
 
     <style>
         body {
+            margin: 0;
+            padding: 0;
             position: relative;
-            width: 100vw;
-            height: 100vh;
-            transform: translateZ(0);
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -o-user-select: none;
-            user-select: none;
-            background-color: black;
-            overflow: hidden;
+            width: 100%;
         }
 
         .mg-button {
@@ -92,7 +75,7 @@
         @media screen and (max-width: 500px) {
 
             .btn-menu,
-            .mg-button button {
+            .mg-button button{
                 font-size: 11px;
             }
         }
@@ -145,30 +128,31 @@
     </style>
     <div id="ve-player-wrapper" class="player-container">
         <div id="veplayer"></div>
-    </div>
-
-    <div id="hls-player-wrapper" class="player-container">
+      </div>
+    
+      <div id="hls-player-wrapper" class="player-container">
         <video id="hls-player" autoplay muted controls playsinline></video>
         <div class="player-overlay" id="hls-overlay">
             <div class="loader"></div>
             <p class="status-text"></p>
             <button class="unmute-button">Bấm để bật tiếng 🔊</button>
         </div>
-    </div>
-
-    <div id="webrtc-player-wrapper" class="player-container">
+      </div>
+      
+      <div id="webrtc-player-wrapper" class="player-container">
         <video id="webrtc-player" autoplay muted controls playsinline></video>
         <div class="player-overlay" id="webrtc-overlay">
             <div class="loader"></div>
             <p class="status-text"></p>
             <button class="unmute-button">Bấm để bật tiếng 🔊</button>
         </div>
-    </div>
+      </div>
     <div class="btn-menu" href="#" onclick="myFunction()"><i class="fa fa-bars"></i> Server</div>
     <div class="mg-button" id="myLinks">
         <button class="b0 active" data-id="0" onclick="myFunction()">SERVER 1</button>
         <button class="b1" data-id="1" onclick="myFunction()">SERVER 2</button>
         <button class="b2" data-id="2" onclick="myFunction()">SERVER 3</button>
+        <button class="b3" data-id="3" onclick="myFunction()">SERVER 4</button>
 
     </div>
     <!-- <link rel="stylesheet" href="index.min.css">
@@ -189,7 +173,7 @@
         (function initButtons() {
             const params = new URLSearchParams(window.location.search);
             const currentIndex = Number(params.get('index')) || 0;
-            if (currentIndex > 2) {
+            if (currentIndex > 4) {
                 currentIndex = 0;
             }
 
