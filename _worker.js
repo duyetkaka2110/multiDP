@@ -9,7 +9,7 @@ export default {
     // Chỉ thêm CSP nếu là HTML
     const contentType = response.headers.get("content-type") || "";
     if (contentType.includes("text/html")) {
-      newHeaders.set("Content-Security-Policy", "frame-ancestors 'self' https://tglaksao.com https://truonggalaksao.com https://*.bakent.live https://cf1.live  https://tgbp777.net https://*.tgbp777.net https://live.ccapplive.site/; ");
+      newHeaders.set("Content-Security-Policy", "frame-ancestors 'self' https://tglaksao.com https://truonggalaksao.com https://*.bakent.live https://cf1.live  https://tgbp777.net https://*.tgbp777.net https://live.ccapplive.site https://vt888.live  https://*.vt888.live ; ");
     }
 
     // Trả về response
