@@ -1,8 +1,5 @@
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-
-    // Lấy header referer
     const referer = request.headers.get("referer") || "";
 
     const allowedDomains = [
@@ -15,24 +12,39 @@ export default {
       "vt888.live"
     ];
 
-    const isAllowed = allowedDomains.some(domain =>
-      referer.includes(domain)
-    );
+    // ✅ Check referer chuẩn (không dùng includes nữa)
+    let isAllowed = false;
 
-    if (!referer || !isAllowed) {
+    if (referer) {
+      try {
+        const hostname = new URL(referer).hostname;
+
+        isAllowed = allowedDomains.some(domain =>
+          hostname === domain || hostname.endsWith("." + domain)
+        );
+      } catch (e) {}
+    }
+
+    // ❌ Không hợp lệ → redirect
+    if (!isAllowed) {
       return Response.redirect("https://bakent.live", 302);
     }
 
+    // ✅ Load nội dung
     const response = await env.ASSETS.fetch(request);
-
     const newHeaders = new Headers(response.headers);
 
     const contentType = response.headers.get("content-type") || "";
 
+    // ✅ Build CSP từ allowedDomains luôn
     if (contentType.includes("text/html")) {
+      const cspDomains = allowedDomains
+        .map(d => `https://${d} https://*.${d}`)
+        .join(" ");
+
       newHeaders.set(
         "Content-Security-Policy",
-        "frame-ancestors 'self' https://tglaksao.com https://truonggalaksao.com https://*.bakent.live https://cf1.live https://tgbp777.net https://*.tgbp777.net https://live.ccapplive.site https://vt888.live https://*.vt888.live;"
+        `frame-ancestors 'self' ${cspDomains};`
       );
     }
 
