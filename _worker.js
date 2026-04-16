@@ -1,18 +1,33 @@
 export default {
   async fetch(request, env, ctx) {
-    // Lấy response gốc từ Pages (nội dung tĩnh)
-    const response = await env.ASSETS.fetch(request);
+    const allowedDomains = [
+      "kclub1.online",
+      "bakent.live",
+      "ccapplive.site",
+      "vt888.live",
+      "tglaksao.com",
+      "truonggalaksao.com",
+    ];
 
-    // Clone headers để chỉnh sửa
+
+    // ✅ Load nội dung
+    const response = await env.ASSETS.fetch(request);
     const newHeaders = new Headers(response.headers);
 
-    // Chỉ thêm CSP nếu là HTML
     const contentType = response.headers.get("content-type") || "";
+
+    // ✅ Build CSP từ allowedDomains luôn
     if (contentType.includes("text/html")) {
-      newHeaders.set("Content-Security-Policy", "frame-ancestors 'self' https://tglaksao.com https://truonggalaksao.com https://*.bakent.live https://cf1.live  https://tgbp777.net https://*.tgbp777.net https://live.ccapplive.site https://vt888.live  https://*.vt888.live ; ");
+      const cspDomains = allowedDomains
+        .map(d => `https://${d} https://*.${d}`)
+        .join(" ");
+
+      newHeaders.set(
+        "Content-Security-Policy",
+        `frame-ancestors 'self' ${cspDomains};`
+      );
     }
 
-    // Trả về response
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
