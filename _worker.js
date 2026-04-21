@@ -6,7 +6,7 @@ export default {
       "ccapplive.site",
       "vt888.live",
       "tglaksao.com",
-      "truonggalaksao.com",
+      "vaccineincheon.com",
     ];
 
 
